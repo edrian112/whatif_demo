@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Share2, Download, Link2, Heart, RotateCcw, Play, ArrowLeft } from 'lucide-react';
+import { Share2, Download, Link2, Heart, RotateCcw, ArrowLeft } from 'lucide-react';
 
 interface ResultShowcaseProps {
   prompt: string;
@@ -81,53 +81,11 @@ export default function ResultShowcase({ prompt, onRestart }: ResultShowcaseProp
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="aspect-[9/16] bg-gradient-to-br from-purple-900 via-pink-900 to-indigo-900 rounded-2xl shadow-2xl glow-purple flex items-center justify-center overflow-hidden relative">
-            {/* Video Placeholder Content */}
-            <div className="text-center text-white p-8">
-              <motion.div
-                className="text-6xl mb-6"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                🎬
-              </motion.div>
-              <h3 className="text-2xl font-bold mb-6">생성된 영상</h3>
-              <p className="text-gray-300 text-sm px-4 leading-relaxed">
-                "{prompt}"
-              </p>
-              <motion.div
-                className="mt-10 inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Play className="w-5 h-5" />
-                <span>재생</span>
-              </motion.div>
-            </div>
-
-            {/* Animated Border */}
-            <motion.div
-              className="absolute inset-0 border-2 border-purple-500/50 rounded-2xl"
-              animate={{
-                borderColor: [
-                  'rgba(139, 92, 246, 0.5)',
-                  'rgba(236, 72, 153, 0.5)',
-                  'rgba(139, 92, 246, 0.5)',
-                ],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
+{/* Video Player */}
+            <video className="w-full h-full object-cover" controls autoPlay loop muted playsInline>
+              <source src="/video/demo1.mp4" type="video/mp4" />
+              브라우저가 비디오 태그를 지원하지 않습니다.
+            </video>
         </motion.div>
 
         {/* Stats */}
