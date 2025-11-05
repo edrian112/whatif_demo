@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Share2, Download, Link2, Heart, RotateCcw, ArrowLeft } from 'lucide-react';
@@ -47,6 +48,26 @@ export default function ResultShowcase({ prompt, onRestart }: ResultShowcaseProp
     { icon: Heart, label: '좋아요' },
   ];
 
+  // Function to determine the video source based on the prompt keywords
+  const getVideoSource = (prompt: string): string => {
+    const lowerPrompt = prompt.toLowerCase();
+
+    if (lowerPrompt.includes('책')) {
+      return '/video/read.mp4';
+    } else if (lowerPrompt.includes('운동')) {
+      return '/video/workout.mp4';
+    } else if (lowerPrompt.includes('창업')) {
+      return '/video/startup.mp4';
+    } else if (lowerPrompt.includes('기타')) {
+      return '/video/guitar.mp4';
+    } else {
+      // Default video if no specific keyword is found
+      return '/video/demo1.mp4';
+    }
+  };
+
+  const videoSrc = getVideoSource(prompt);
+
   return (
     <motion.div
       className="relative w-full h-screen bg-slate-900 overflow-y-auto"
@@ -74,18 +95,16 @@ export default function ResultShowcase({ prompt, onRestart }: ResultShowcaseProp
           </motion.button>
         </div>
 
-        {/* Video Player (Placeholder) */}
+        {/* Video Player */}
         <motion.div
           className="w-full max-w-sm mb-10"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-{/* Video Player */}
-            <video className="w-full h-full object-cover" controls autoPlay loop muted playsInline>
-              <source src="/video/demo1.mp4" type="video/mp4" />
-              브라우저가 비디오 태그를 지원하지 않습니다.
-            </video>
+          <video className="w-full h-full object-cover" controls autoPlay loop muted playsInline src={videoSrc}>
+            브라우저가 비디오 태그를 지원하지 않습니다.
+          </video>
         </motion.div>
 
         {/* Stats */}
